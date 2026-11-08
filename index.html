@@ -546,7 +546,7 @@ Hash      : </span><span class="tok">9BC6028870AEF3F74F4E16B900008179E78B130E6B0
     </div>
   </div>
 
-  <div class="note tip"><b>VMware Tools</b>Install them on every VM: copy-paste and screen resizing start working. Windows: <b>VM → Install VMware Tools</b>, then run <code>setup.exe</code> from the new DVD drive (current VMware Tools ISOs have no <code>setup64.exe</code>). Kali: <code>sudo apt install -y open-vm-tools open-vm-tools-desktop</code>, once it has internet (step 03). Ubuntu Server: <code>sudo apt install -y open-vm-tools</code> (step 05); it has no desktop, so it does not need <code>open-vm-tools-desktop</code>. pfSense: not needed.</div>
+  <div class="note tip"><b>VMware Tools</b>Install them on every VM: copy-paste and screen resizing start working. Windows: <b>VM → Install VMware Tools</b>, then run <code>setup.exe</code> from the new DVD drive (current VMware Tools ISOs have no <code>setup64.exe</code>). Kali: <code>sudo apt install -y open-vm-tools open-vm-tools-desktop</code>, once it has internet (step 03). Ubuntu Server: <code>sudo apt install -y open-vm-tools</code> (step 05); it has no desktop, so it does not need <code>open-vm-tools-desktop</code>. pfSense: not needed.<br><b>Copy-paste from this guide:</b> works into Windows and Kali once their VMware Tools are installed. The Ubuntu Server and pfSense consoles are text-only and never accept paste: for Ubuntu you use SSH from Windows (step 05), and pfSense is set up in its web page from Windows.</div>
 
   <h3>1.4 Create the LAN segments and connect the adapters</h3>
   <p>Open the pfSense VM → <b>VM → Settings</b>. Click <b>Add… → Network Adapter</b> twice, so it has three adapters. Then set each one:</p>
@@ -769,7 +769,13 @@ ping -c 3 google.com</pre></div>
 <span class="to">64 bytes from 142.250.184.206: icmp_seq=1 ttl=115 time=34.1 ms
 …
 3 packets transmitted, 3 received, 0% packet loss</span>   <span class="an">← internet works</span></pre></div>
-      <p><b>VMware Tools on Kali.</b> Now that Kali has internet, make sure the VMware Tools are installed and current. Then copy-paste between your laptop and Kali works, and the screen resizes with the window:</p>
+      <p><b>VMware Tools on Kali.</b> Now that Kali has internet, make sure the VMware Tools are installed and current. Then copy-paste between your laptop and Kali works, and the screen resizes with the window. This is what lets you copy commands from this guide on your laptop and paste them into Kali.</p>
+      <ul class="small">
+        <li>The Kali image usually ships with these tools, so pasting often works already. If it does not, <b>type these lines by hand</b> (or open this guide in Kali's own browser and copy from there).</li>
+        <li>After the reboot, copy on your laptop with <kbd>Ctrl</kbd>+<kbd>C</kbd> and paste in the Kali terminal with <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd>.</li>
+        <li>Still no paste? Shut Kali down, then <b>VM → Settings → Options → Guest Isolation</b>: tick <b>Enable copy and paste</b> (and drag and drop).</li>
+      </ul>
+      <p>Run:</p>
       <div class="code" data-share="c-kvmt"><div class="lbl">bash · Kali terminal</div><pre><span class="c"># VMware Tools for Linux: copy-paste, shared clipboard, auto screen size</span>
 sudo apt update
 sudo apt install -y open-vm-tools open-vm-tools-desktop
@@ -2010,7 +2016,7 @@ Restart-Service -Name Wazuh</pre></div>
     </div>
   </div>
 
-  <div class="note tip"><b>VMware Tools</b>Установите их на каждую ВМ: заработают копирование-вставка и изменение размера экрана. Windows: <b>VM → Install VMware Tools</b>, затем запустите <code>setup.exe</code> с появившегося DVD (в нынешних ISO VMware Tools файла <code>setup64.exe</code> нет). Kali: <code>sudo apt install -y open-vm-tools open-vm-tools-desktop</code>, когда появится интернет (шаг 03). Ubuntu Server: <code>sudo apt install -y open-vm-tools</code> (шаг 05); рабочего стола там нет, поэтому <code>open-vm-tools-desktop</code> не нужен. pfSense: не нужны.</div>
+  <div class="note tip"><b>VMware Tools</b>Установите их на каждую ВМ: заработают копирование-вставка и изменение размера экрана. Windows: <b>VM → Install VMware Tools</b>, затем запустите <code>setup.exe</code> с появившегося DVD (в нынешних ISO VMware Tools файла <code>setup64.exe</code> нет). Kali: <code>sudo apt install -y open-vm-tools open-vm-tools-desktop</code>, когда появится интернет (шаг 03). Ubuntu Server: <code>sudo apt install -y open-vm-tools</code> (шаг 05); рабочего стола там нет, поэтому <code>open-vm-tools-desktop</code> не нужен. pfSense: не нужны.<br><b>Копирование из руководства:</b> в Windows и Kali работает после установки VMware Tools. Консоли Ubuntu Server и pfSense текстовые и вставку не принимают никогда: к Ubuntu вы подключаетесь по SSH из Windows (шаг 05), а pfSense настраивается на веб-странице из Windows.</div>
 
   <h3>1.4 Создаём сегменты LAN и подключаем адаптеры</h3>
   <p>Откройте ВМ pfSense → <b>VM → Settings</b>. Дважды нажмите <b>Add… → Network Adapter</b>, чтобы адаптеров стало три. Затем настройте каждый:</p>
@@ -2133,7 +2139,13 @@ Restart-Service -Name Wazuh</pre></div>
     <div role="tabpanel" id="t-kali-ip-ru" aria-labelledby="b-kali-ip-ru"><div data-use="5"></div>
       <p class="small">Откройте терминал: чёрная иконка терминала на верхней панели или <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd>. Вставка — <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd>. <code>sudo</code> спросит пароль <code>kali</code>; при вводе ничего не отображается. Должно выглядеть так:</p>
       <div data-use="t-kali-ip"></div>
-      <p><b>VMware Tools в Kali.</b> Теперь, когда у Kali есть интернет, убедитесь, что VMware Tools установлены и обновлены. Тогда заработает копирование-вставка между ноутбуком и Kali, а экран будет подстраиваться под окно:</p>
+      <p><b>VMware Tools в Kali.</b> Теперь, когда у Kali есть интернет, убедитесь, что VMware Tools установлены и обновлены. Тогда заработает копирование-вставка между ноутбуком и Kali, а экран будет подстраиваться под окно. Именно это позволяет копировать команды из этого руководства на ноутбуке и вставлять их в Kali.</p>
+      <ul class="small">
+        <li>В образе Kali эти инструменты обычно уже есть, поэтому вставка часто работает сразу. Если нет, <b>наберите эти строки вручную</b> (или откройте руководство в браузере внутри Kali и копируйте оттуда).</li>
+        <li>После перезагрузки копируйте на ноутбуке через <kbd>Ctrl</kbd>+<kbd>C</kbd>, а вставляйте в терминал Kali через <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd>.</li>
+        <li>Вставка всё равно не работает? Выключите Kali, затем <b>VM → Settings → Options → Guest Isolation</b>: отметьте <b>Enable copy and paste</b> (и drag and drop).</li>
+      </ul>
+      <p>Выполните:</p>
       <div data-use="c-kvmt"></div>
       <div data-use="t-kvmt"></div></div>
     <div role="tabpanel" id="t-win-ip-ru" aria-labelledby="b-win-ip-ru" hidden>
