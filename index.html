@@ -186,6 +186,18 @@ footer{max-width:1180px;margin:0 auto;padding-block:0 40px;color:var(--muted);fo
 .langswitch button:hover:not([aria-pressed="true"]){background:var(--accent-soft);color:var(--ink)}
 .toc .langswitch{display:none;margin-bottom:12px}
 @media (min-width:1000px){.toc .langswitch{display:inline-flex}}
+.langbar{gap:8px;align-items:center}
+@media (min-width:1000px){.langbar{display:none}}
+.tocctl{display:none;gap:8px;align-items:center;margin-bottom:12px}
+@media (min-width:1000px){.tocctl{display:flex}}
+.toc .langswitch{margin-bottom:0}
+.themebtn{font:600 1rem/1 var(--f-mono);width:40px;height:34px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);cursor:pointer}
+.themebtn:hover{background:var(--accent-soft)}
+.themebtn .ti-light{display:none}
+:root[data-theme="dark"] .themebtn .ti-dark{display:none}
+:root[data-theme="dark"] .themebtn .ti-light{display:inline}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .themebtn .ti-dark{display:none}:root:not([data-theme="light"]) .themebtn .ti-light{display:inline}}
+
 .top{padding-block:20px 28px}
 p.small{font-size:.9rem;color:var(--muted)}
 kbd{font:600 .8em/1 var(--f-mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:2px 5px;background:var(--bg)}
@@ -230,7 +242,7 @@ h4{margin:18px 0 6px;font-size:1rem}
 @media (min-width:1000px){.lightbox img{max-width:96vw;max-height:94vh;margin-top:2vh}}
 .shot figcaption{font-size:.88rem;color:var(--muted);padding:8px 12px;border-top:1px solid var(--line)}
 </style>
-<div class="langbar"><div class="langswitch" role="group" aria-label="Language / Язык"><button type="button" data-setlang="en" aria-pressed="true">EN</button><button type="button" data-setlang="ru" aria-pressed="false">RU</button></div></div>
+<div class="langbar"><div class="langswitch" role="group" aria-label="Language / Язык"><button type="button" data-setlang="en" aria-pressed="true">EN</button><button type="button" data-setlang="ru" aria-pressed="false">RU</button></div><button type="button" class="themebtn" data-toggletheme aria-label="Dark / light theme" title="Dark / light theme"><span class="ti-dark" aria-hidden="true">☾</span><span class="ti-light" aria-hidden="true">☀</span></button></div>
 <div data-lang="en" lang="en">
 <header class="top">
   <div class="eyebrow">Cybersecurity · Month 7 · Individual project</div>
@@ -249,7 +261,7 @@ h4{margin:18px 0 6px;font-size:1rem}
 
 <div class="wrap">
 <nav class="toc" aria-label="Contents">
-  <div class="langswitch" role="group" aria-label="Language"><button type="button" data-setlang="en" aria-pressed="true">EN</button><button type="button" data-setlang="ru" aria-pressed="false">RU</button></div>
+  <div class="tocctl"><div class="langswitch" role="group" aria-label="Language"><button type="button" data-setlang="en" aria-pressed="true">EN</button><button type="button" data-setlang="ru" aria-pressed="false">RU</button></div><button type="button" class="themebtn" data-toggletheme aria-label="Dark / light theme" title="Dark / light theme"><span class="ti-dark" aria-hidden="true">☾</span><span class="ti-light" aria-hidden="true">☀</span></button></div>
   <details open class="tocdetails">
     <summary>Contents</summary>
     <ol>
@@ -1771,7 +1783,7 @@ Restart-Service -Name Wazuh</pre></div>
 
 <div class="wrap">
 <nav class="toc" aria-label="Содержание">
-  <div class="langswitch" role="group" aria-label="Язык"><button type="button" data-setlang="en" aria-pressed="true">EN</button><button type="button" data-setlang="ru" aria-pressed="false">RU</button></div>
+  <div class="tocctl"><div class="langswitch" role="group" aria-label="Язык"><button type="button" data-setlang="en" aria-pressed="true">EN</button><button type="button" data-setlang="ru" aria-pressed="false">RU</button></div><button type="button" class="themebtn" data-toggletheme aria-label="Dark / light theme" title="Dark / light theme"><span class="ti-dark" aria-hidden="true">☾</span><span class="ti-light" aria-hidden="true">☀</span></button></div>
   <details open class="tocdetails">
     <summary>Содержание</summary>
     <ol>
@@ -2768,6 +2780,19 @@ Restart-Service -Name Wazuh</pre></div>
   }
 
   /* 6. Language switch */
+
+  // theme toggle: follows the system until the reader picks one
+  (function(){
+    var root=document.documentElement, mq=window.matchMedia('(prefers-color-scheme: dark)');
+    try{var t=localStorage.getItem('soc-lab-theme'); if(t==='dark'||t==='light') root.setAttribute('data-theme',t);}catch(e){}
+    function isDark(){var t=root.getAttribute('data-theme'); return t ? t==='dark' : mq.matches;}
+    document.querySelectorAll('[data-toggletheme]').forEach(function(b){
+      b.addEventListener('click',function(){
+        var t=isDark()?'light':'dark'; root.setAttribute('data-theme',t);
+        try{localStorage.setItem('soc-lab-theme',t);}catch(e){}
+      });
+    });
+  })();
   function setLang(lang, keepPlace){
     if(!panes[lang]) lang = 'en';
     var target = keepPlace ? document.getElementById(lang === 'ru' ? current + '-ru' : current) : null;
