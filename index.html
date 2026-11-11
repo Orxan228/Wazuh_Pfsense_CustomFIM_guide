@@ -583,7 +583,7 @@ Hash      : </span><span class="tok">9BC6028870AEF3F74F4E16B900008179E78B130E6B0
   <ol class="pins">
     <li><span class="pin">1</span><span>The first <b>Network Adapter</b> stays <b>NAT</b> (WAN, internet). Select <b>Network Adapter 2</b>.</span></li>
     <li><span class="pin">2</span><span>Make sure <b>Connect at power on</b> is ticked.</span></li>
-    <li><span class="pin">3</span><span>Choose <b>LAN segment</b> and pick <code>LAN1</code>. For <b>Network Adapter 3</b> pick <code>LAN2</code>.</span></li>
+    <li><span class="pin">3</span><span>Choose <b>LAN segment</b> (the <b>last</b> option, below "Custom") and pick <code>LAN1</code>. For <b>Network Adapter 3</b> pick <code>LAN2</code>. Do <b>not</b> use <b>Custom: Specific virtual network</b> (VMnet0–19): those are shared host networks with VMware's own DHCP, not the isolated LANs this lab needs. If the VMnet drop-down is open and hides the option, close it first. Only 2 adapters? <b>Add… → Network Adapter</b> adds the third.</span></li>
     <li><span class="pin">4</span><span>The first time, the list is empty. Click <b>LAN Segments…</b> → <b>Add</b> → type <code>LAN1</code>, Add again → <code>LAN2</code> → OK. You do this only once; every VM can then use them.</span></li>
     <li><span class="pin">5</span><span><b>Advanced…</b> shows the adapter's <b>MAC address</b>. You need it to tell the adapters apart in pfSense, and for the Wazuh IP reservation in step 05.</span></li>
   </ol>
@@ -2024,7 +2024,7 @@ Restart-Service -Name Wazuh</pre></div>
   <ol class="pins">
     <li><span class="pin">1</span><span>Первый <b>Network Adapter</b> оставьте <b>NAT</b> (WAN, интернет). Выберите <b>Network Adapter 2</b>.</span></li>
     <li><span class="pin">2</span><span>Проверьте, что отмечено <b>Connect at power on</b>.</span></li>
-    <li><span class="pin">3</span><span>Выберите <b>LAN segment</b> и в списке <code>LAN1</code>. Для <b>Network Adapter 3</b> — <code>LAN2</code>.</span></li>
+    <li><span class="pin">3</span><span>Выберите <b>LAN segment</b> (<b>последний</b> вариант, под «Custom») и в списке <code>LAN1</code>. Для <b>Network Adapter 3</b> — <code>LAN2</code>. <b>Не</b> используйте <b>Custom: Specific virtual network</b> (VMnet0–19): это общие сети хоста со своим DHCP от VMware, а не изолированные LAN, которые нужны лаборатории. Если открытый список VMnet закрывает этот вариант, сначала закройте его. Только 2 адаптера? <b>Add… → Network Adapter</b> добавит третий.</span></li>
     <li><span class="pin">4</span><span>В первый раз список пуст. Нажмите <b>LAN Segments…</b> → <b>Add</b> → введите <code>LAN1</code>, снова Add → <code>LAN2</code> → OK. Это делается один раз, потом сегменты доступны всем ВМ.</span></li>
     <li><span class="pin">5</span><span><b>Advanced…</b> показывает <b>MAC-адрес</b> адаптера. Он нужен, чтобы различать адаптеры в pfSense и для резервирования IP Wazuh в шаге 05.</span></li>
   </ol>
